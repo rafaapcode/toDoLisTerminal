@@ -1,3 +1,5 @@
+import Table from './createTable'
+
 describe('Create Table', () => {
   test('Should return correct quantity of tasks', () => {
     const sut = new Table()
@@ -9,6 +11,7 @@ describe('Create Table', () => {
     const result = sut.create(tasks)
     expect(result).toBe(3)
     tasks.push({ id: 4, task: 'Estudar inglês' })
-    expect(result).toBe(4)
+    const result2 = sut.create(tasks)
+    expect(result2).toBe(4)
   })
 })
