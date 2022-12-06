@@ -1,5 +1,5 @@
 import { TaskModel } from '../../domain/usecases/addtask/addtask'
 
-export interface taskAdd {
+export default interface AddTaskRepository {
   add: (task: TaskModel) => Promise<string>
 }
