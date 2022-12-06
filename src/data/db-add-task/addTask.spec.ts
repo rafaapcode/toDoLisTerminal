@@ -49,4 +49,12 @@ describe('Add Tasks', () => {
     await sut.addTask('Estudar Clean Architecture')
     expect(spyRepository).toHaveBeenCalledWith(task)
   })
+
+  test('Should throw if the AddTaskRepository add method throws', async () => {
+    const addRepository = makeAddTaskRepositoryStub()
+    const sut = new AddTasks(addRepository)
+    jest.spyOn(addRepository, 'add').mockReturnValueOnce(Promise.reject(new Error()))
+    const promise = sut.addTask('Estudar Clean Architecture')
+    await expect(promise).rejects.toThrow()
+  })
 })
