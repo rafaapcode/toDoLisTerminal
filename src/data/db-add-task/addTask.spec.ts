@@ -15,7 +15,8 @@ const makeAddTaskRepositoryStub = (): AddTaskRepository => {
 
 describe('Add Tasks', () => {
   test('Should return the task was added', async () => {
-    const sut = new AddTasks()
+    const addRepository = makeAddTaskRepositoryStub()
+    const sut = new AddTasks(addRepository)
     const task = 'Estudar inglês'
     const task2 = 'Estudar espanhol'
     const result = await sut.addTask(task)
@@ -25,24 +26,27 @@ describe('Add Tasks', () => {
   })
 
   test('Should return an TaskError if the task is a empty string', async () => {
-    const sut = new AddTasks()
+    const addRepository = makeAddTaskRepositoryStub()
+    const sut = new AddTasks(addRepository)
     const task = ''
     const result = await sut.addTask(task)
     expect(result.body).toEqual(new TaskError('Tasks is invalid'))
   })
 
   test('Should throw if the addTask method throws', async () => {
-    const sut = new AddTasks()
+    const addRepository = makeAddTaskRepositoryStub()
+    const sut = new AddTasks(addRepository)
     jest.spyOn(sut, 'addTask').mockReturnValueOnce(Promise.reject(new Error()))
     const promise = sut.addTask('Estudar Clean Architecture')
     await expect(promise).rejects.toThrow()
   })
 
   test('Should calls AddTaskRepository with correct values', async () => {
-    const sut = makeAddTaskRepositoryStub()
-    const spyRepository = jest.spyOn(sut, 'add')
+    const addRepository = makeAddTaskRepositoryStub()
+    const sut = new AddTasks(addRepository)
+    const spyRepository = jest.spyOn(addRepository, 'add')
     const task = { id: 1, body: 'Estudar Clean Architecture' }
-    await sut.add(task)
+    await sut.addTask('Estudar Clean Architecture')
     expect(spyRepository).toHaveBeenCalledWith(task)
   })
 })

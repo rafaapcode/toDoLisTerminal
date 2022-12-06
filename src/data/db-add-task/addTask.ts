@@ -1,11 +1,13 @@
 import { AddTask, TaskModel } from '../../domain/usecases/addtask/addtask'
 import TaskError from '../errors/taskError'
+import { AddTaskRepository } from '../protocols/addTaskRepository'
 
 export default class AddTasks implements AddTask {
   private id: number
-
-  constructor () {
+  private readonly repositoryTask: AddTaskRepository
+  constructor (addTaskRepo: AddTaskRepository) {
     this.id = 1
+    this.repositoryTask = addTaskRepo
   }
 
   async addTask (task: string): Promise<TaskModel> {
@@ -14,6 +16,7 @@ export default class AddTasks implements AddTask {
     }
     const id = this.id++
     const taskToAdd = { id, body: task }
+    await this.repositoryTask.add(taskToAdd)
     return taskToAdd
   }
 }
