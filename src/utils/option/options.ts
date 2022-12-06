@@ -1,4 +1,4 @@
-import Options, { Option } from '../presentation/protocols/options'
+import Options, { Option } from '../../presentation/protocols/options'
 
 export default class Ops implements Options {
   op (): Option {
@@ -6,7 +6,8 @@ export default class Ops implements Options {
       const option = Number(prompt(`O que deseja fazer ?
       1 - Adicionar tarefa
       2 - Deletar tarefa
-      3 - Visualizar tarefas`))
+      3 - Visualizar tarefas`
+      ))
       if (option < 1 || option > 3) {
         return {
           statusCode: 400,
