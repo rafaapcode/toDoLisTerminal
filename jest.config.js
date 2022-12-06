@@ -3,7 +3,7 @@ module.exports = {
   // Onde queremos pegar os arquivos para teste
   collectCoverageFrom: ['<rootDir/src/**/*.ts / .js>'],
   coverageDirectory: 'coverage',
-  testEnviroment: 'node',
+  testEnvironment: 'node',
   transform: {
     '.+\\.ts$': 'ts-jest'
   }
