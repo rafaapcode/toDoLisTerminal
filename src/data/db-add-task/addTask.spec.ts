@@ -1,10 +1,10 @@
 import AddTasks from './addTask'
 import { TaskModel } from '../../domain/usecases/addtask/addtask'
-import { taskAdd } from '../protocols/addTaskRepository'
+import { TaskAdd } from '../protocols/addTaskRepository'
 import TaskError from '../errors/taskError'
 
-const makeAddTaskRepositoryStub = (): taskAdd => {
-  class AddTaskRepositoryStub implements taskAdd {
+const makeAddTaskRepositoryStub = (): TaskAdd => {
+  class AddTaskRepositoryStub implements TaskAdd {
     async add (task: TaskModel): Promise<string> {
       return Promise.resolve('ok')
     }
@@ -15,7 +15,7 @@ const makeAddTaskRepositoryStub = (): taskAdd => {
 
 interface SutTypes {
   addTask: AddTasks
-  addRepository: taskAdd
+  addRepository: TaskAdd
 }
 
 const makeSut = (): SutTypes => {
