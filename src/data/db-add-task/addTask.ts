@@ -1,11 +1,11 @@
 import { AddTask, TaskModel } from '../../domain/usecases/addtask/addtask'
 import TaskError from '../errors/taskError'
-import { taskAdd } from '../protocols/addTaskRepository'
+import { TaskAdd } from '../protocols/addTaskRepository'
 
 export default class AddTasks implements AddTask {
   private id: number
-  private readonly repositoryTask: taskAdd
-  constructor (addTaskRepo: taskAdd) {
+  private readonly repositoryTask: TaskAdd
+  constructor (addTaskRepo: TaskAdd) {
     this.id = 1
     this.repositoryTask = addTaskRepo
   }
