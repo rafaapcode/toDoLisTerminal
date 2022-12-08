@@ -1,3 +1,3 @@
 export interface DeleteTasks {
-  delete: (path: string) => Promise<string>
+  delete: (path: string, id: number) => Promise<string>
 }

@@ -7,8 +7,8 @@ export default class DeleteTask implements DeleteTasks {
     this.deleteTasksRepository = deleteTasksRepo
   }
 
-  async delete (path: string): Promise<string> {
-    await this.deleteTasksRepository.delete(path)
+  async delete (path: string, id: number): Promise<string> {
+    await this.deleteTasksRepository.delete(path, id)
     return 'Deleted with success'
   }
 }
