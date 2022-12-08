@@ -29,4 +29,13 @@ describe('Delete Tasks', () => {
     await sut.delete(path)
     expect(spyDeleteRepo).toHaveBeenCalledWith(path)
   })
+
+  test('Should throws if DeleteTaskRepository method throws', async () => {
+    const deleteRepo = makeDeleteRepository()
+    const sut = new DeleteTask(deleteRepo)
+    jest.spyOn(deleteRepo, 'delete').mockReturnValueOnce(Promise.reject(new Error()))
+    const path = resolve('src', 'database')
+    const promise = sut.delete(path)
+    await expect(promise).rejects.toThrow()
+  })
 })
