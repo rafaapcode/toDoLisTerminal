@@ -2,6 +2,8 @@ import { resolve } from 'path'
 import { readFile, writeFile } from 'node:fs/promises'
 import DeleteTaskRepository from './DeleteTaskRepo'
 
+const path = resolve('src', 'infra', 'deleteTaskRepository', 'mocks', 'valid-tasks.json')
+
 describe('Delete task', () => {
   afterAll(async () => {
     const expected = [
@@ -9,13 +11,11 @@ describe('Delete task', () => {
       { id: 2, body: 'Estudar chines' },
       { id: 3, body: 'Estudar espanhol' }
     ]
-    const path = resolve('src', 'infra', 'deleteTaskRepository', 'mocks', 'valid-tasks.json')
     await writeFile(path, JSON.stringify(expected), { flag: 'w', encoding: 'utf8' })
   })
 
   test('Should delete the choose task', async () => {
     const sut = new DeleteTaskRepository()
-    const path = resolve('src', 'infra', 'deleteTaskRepository', 'mocks', 'valid-tasks.json')
     const tasks = JSON.parse(await readFile(path, 'utf8'))
     const expected = [
       { id: 1, body: 'Estudar ingles' },
@@ -35,7 +35,6 @@ describe('Delete task', () => {
   test('Should calls method with correct values', async () => {
     const sut = new DeleteTaskRepository()
     const spyDelete = jest.spyOn(sut, 'delete')
-    const path = resolve('src', 'infra', 'deleteTaskRepository', 'mocks', 'valid-tasks.json')
     await sut.delete(path, 2)
     expect(spyDelete).toHaveBeenCalledWith(path, 2)
   })

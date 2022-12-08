@@ -12,11 +12,12 @@ const makeDeleteRepository = (): DeleteTaskRepo => {
   return new DeleteRepository()
 }
 
+const path = resolve('src', 'database')
+
 describe('Delete Tasks', () => {
   test('Should return a message on a success', async () => {
     const deleteRepo = makeDeleteRepository()
     const sut = new DeleteTask(deleteRepo)
-    const path = resolve('src', 'database')
     const msg = await sut.delete(path, 0)
     expect(msg).toBe('Deleted with success')
   })
@@ -25,7 +26,6 @@ describe('Delete Tasks', () => {
     const deleteRepo = makeDeleteRepository()
     const sut = new DeleteTask(deleteRepo)
     const spyDeleteRepo = jest.spyOn(deleteRepo, 'delete')
-    const path = resolve('src', 'database')
     await sut.delete(path, 0)
     expect(spyDeleteRepo).toHaveBeenCalledWith(path, 0)
   })
@@ -34,7 +34,6 @@ describe('Delete Tasks', () => {
     const deleteRepo = makeDeleteRepository()
     const sut = new DeleteTask(deleteRepo)
     jest.spyOn(deleteRepo, 'delete').mockReturnValueOnce(Promise.reject(new Error()))
-    const path = resolve('src', 'database')
     const promise = sut.delete(path, 0)
     await expect(promise).rejects.toThrow()
   })
