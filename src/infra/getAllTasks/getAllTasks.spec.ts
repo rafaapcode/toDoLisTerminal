@@ -13,4 +13,12 @@ describe('Get all the Tasks in the JSON DB', () => {
     ]
     expect(allTasks).toEqual(expected)
   })
+
+  test('Should calls GET method with correct value', async () => {
+    const sut = new GetAllTasksRepo()
+    const spyAllTasks = jest.spyOn(sut, 'get')
+    const path = resolve('src', 'infra', 'getAllTasks', 'mocks', 'valid-tasks.json')
+    await sut.get(path)
+    expect(spyAllTasks).toHaveBeenCalledWith(path)
+  })
 })
