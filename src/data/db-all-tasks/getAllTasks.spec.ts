@@ -26,11 +26,25 @@ const makeAllTasksRepo = (): AllTasksRepo => {
   return new AllTasksRepository()
 }
 
+interface SutTypes {
+  sut: GetAllTasks
+  allTasksRepository: AllTasksRepo
+}
+
+const makeSut = (): SutTypes => {
+  const allTasksRepository = makeAllTasksRepo()
+  const sut = new GetAllTasks(allTasksRepository)
+
+  return {
+    sut,
+    allTasksRepository
+  }
+}
+
 describe('Add Tasks', () => {
   test('Should return all tasks in the JSON DB', async () => {
+    const { sut } = makeSut()
     const path = resolve('src', 'db-all-tasks', 'mocks')
-    const allTasksRepository = makeAllTasksRepo()
-    const sut = new GetAllTasks(allTasksRepository)
     const tasks = await sut.get(path)
     expect(tasks).toEqual([
       {
@@ -49,18 +63,16 @@ describe('Add Tasks', () => {
   })
 
   test('Should calls AllTasksRepository method with correct values', async () => {
-    const allTasksRepository = makeAllTasksRepo()
+    const { allTasksRepository, sut } = makeSut()
     const spyAllTasks = jest.spyOn(allTasksRepository, 'get')
     const path = resolve('src', 'db-all-tasks', 'mocks')
-    const sut = new GetAllTasks(allTasksRepository)
     await sut.get(path)
     expect(spyAllTasks).toHaveBeenCalledWith(resolve('src', 'db-all-tasks', 'mocks'))
   })
 
   test('Should throws if AllTasksRepository method throw', async () => {
-    const allTasksRepository = makeAllTasksRepo()
+    const { allTasksRepository, sut } = makeSut()
     jest.spyOn(allTasksRepository, 'get').mockReturnValueOnce(Promise.reject(new Error()))
-    const sut = new GetAllTasks(allTasksRepository)
     const path = resolve('src', 'db-all-tasks', 'mocks')
     const promise = sut.get(path)
     await expect(promise).rejects.toThrow()
