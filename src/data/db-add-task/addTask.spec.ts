@@ -1,10 +1,11 @@
 import AddTasks from './addTask'
 import { TaskModel } from '../../domain/usecases/addtask/addtask'
-import { TaskAdd } from '../protocols/addTaskRepository'
+import AddTaskRepository from '../protocols/addTaskRepository'
 import TaskError from '../errors/taskError'
+import { resolve } from 'node:path'
 
-const makeAddTaskRepositoryStub = (): TaskAdd => {
-  class AddTaskRepositoryStub implements TaskAdd {
+const makeAddTaskRepositoryStub = (): AddTaskRepository => {
+  class AddTaskRepositoryStub implements AddTaskRepository {
     async add (task: TaskModel): Promise<string> {
       return Promise.resolve('ok')
     }
@@ -15,7 +16,7 @@ const makeAddTaskRepositoryStub = (): TaskAdd => {
 
 interface SutTypes {
   addTask: AddTasks
-  addRepository: TaskAdd
+  addRepository: AddTaskRepository
 }
 
 const makeSut = (): SutTypes => {
@@ -33,23 +34,23 @@ describe('Add Tasks', () => {
     const { addTask } = makeSut()
     const task = 'Estudar inglês'
     const task2 = 'Estudar espanhol'
-    const result = await addTask.addTask(task)
+    const result = await addTask.addTask(task, resolve('src', 'database', 'dbTest.json'))
     expect(result).toEqual({ id: 1, body: 'Estudar inglês' })
-    const result2 = await addTask.addTask(task2)
+    const result2 = await addTask.addTask(task2, resolve('src', 'database', 'dbTest.json'))
     expect(result2).toEqual({ id: 2, body: 'Estudar espanhol' })
   })
 
   test('Should return an TaskError if the task is a empty string', async () => {
     const { addTask } = makeSut()
     const task = ''
-    const result = await addTask.addTask(task)
+    const result = await addTask.addTask(task, resolve('src', 'database', 'dbTest.json'))
     expect(result.body).toEqual(new TaskError('Tasks is invalid'))
   })
 
   test('Should throw if the addTask method throws', async () => {
     const { addTask } = makeSut()
     jest.spyOn(addTask, 'addTask').mockReturnValueOnce(Promise.reject(new Error()))
-    const promise = addTask.addTask('Estudar Clean Architecture')
+    const promise = addTask.addTask('Estudar Clean Architecture', resolve('src', 'database', 'dbTest.json'))
     await expect(promise).rejects.toThrow()
   })
 
@@ -57,14 +58,14 @@ describe('Add Tasks', () => {
     const { addTask, addRepository } = makeSut()
     const spyRepository = jest.spyOn(addRepository, 'add')
     const task = { id: 1, body: 'Estudar Clean Architecture' }
-    await addTask.addTask('Estudar Clean Architecture')
-    expect(spyRepository).toHaveBeenCalledWith(task)
+    await addTask.addTask('Estudar Clean Architecture', resolve('src', 'database', 'dbTest.json'))
+    expect(spyRepository).toHaveBeenCalledWith(task, resolve('src', 'database', 'dbTest.json'))
   })
 
   test('Should throw if the AddTaskRepository add method throws', async () => {
     const { addTask, addRepository } = makeSut()
     jest.spyOn(addRepository, 'add').mockReturnValueOnce(Promise.reject(new Error()))
-    const promise = addTask.addTask('Estudar Clean Architecture')
+    const promise = addTask.addTask('Estudar Clean Architecture', resolve('src', 'database', 'dbTest.json'))
     await expect(promise).rejects.toThrow()
   })
 })
