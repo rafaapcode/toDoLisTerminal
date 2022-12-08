@@ -12,28 +12,40 @@ const makeDeleteRepository = (): DeleteTaskRepo => {
   return new DeleteRepository()
 }
 
+interface SutTypes {
+  sut: DeleteTask
+  deleteTaskRepository: DeleteTaskRepo
+}
+
+const makeSut = (): SutTypes => {
+  const deleteTaskRepository = makeDeleteRepository()
+  const sut = new DeleteTask(deleteTaskRepository)
+
+  return {
+    sut,
+    deleteTaskRepository
+  }
+}
+
 const path = resolve('src', 'database')
 
 describe('Delete Tasks', () => {
   test('Should return a message on a success', async () => {
-    const deleteRepo = makeDeleteRepository()
-    const sut = new DeleteTask(deleteRepo)
+    const { sut } = makeSut()
     const msg = await sut.delete(path, 0)
     expect(msg).toBe('Deleted with success')
   })
 
   test('Should calls the delete method with correct value', async () => {
-    const deleteRepo = makeDeleteRepository()
-    const sut = new DeleteTask(deleteRepo)
-    const spyDeleteRepo = jest.spyOn(deleteRepo, 'delete')
+    const { deleteTaskRepository, sut } = makeSut()
+    const spyDeleteRepo = jest.spyOn(deleteTaskRepository, 'delete')
     await sut.delete(path, 0)
     expect(spyDeleteRepo).toHaveBeenCalledWith(path, 0)
   })
 
   test('Should throws if DeleteTaskRepository method throws', async () => {
-    const deleteRepo = makeDeleteRepository()
-    const sut = new DeleteTask(deleteRepo)
-    jest.spyOn(deleteRepo, 'delete').mockReturnValueOnce(Promise.reject(new Error()))
+    const { deleteTaskRepository, sut } = makeSut()
+    jest.spyOn(deleteTaskRepository, 'delete').mockReturnValueOnce(Promise.reject(new Error()))
     const promise = sut.delete(path, 0)
     await expect(promise).rejects.toThrow()
   })

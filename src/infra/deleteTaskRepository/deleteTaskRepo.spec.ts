@@ -4,6 +4,8 @@ import DeleteTaskRepository from './DeleteTaskRepo'
 
 const path = resolve('src', 'infra', 'deleteTaskRepository', 'mocks', 'valid-tasks.json')
 
+const sut = new DeleteTaskRepository()
+
 describe('Delete task', () => {
   afterAll(async () => {
     const expected = [
@@ -15,7 +17,6 @@ describe('Delete task', () => {
   })
 
   test('Should delete the choose task', async () => {
-    const sut = new DeleteTaskRepository()
     const tasks = JSON.parse(await readFile(path, 'utf8'))
     const expected = [
       { id: 1, body: 'Estudar ingles' },
@@ -33,7 +34,6 @@ describe('Delete task', () => {
   })
 
   test('Should calls method with correct values', async () => {
-    const sut = new DeleteTaskRepository()
     const spyDelete = jest.spyOn(sut, 'delete')
     await sut.delete(path, 2)
     expect(spyDelete).toHaveBeenCalledWith(path, 2)
