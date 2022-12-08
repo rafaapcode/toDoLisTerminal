@@ -56,4 +56,13 @@ describe('Add Tasks', () => {
     await sut.get(path)
     expect(spyAllTasks).toHaveBeenCalledWith(resolve('src', 'db-all-tasks', 'mocks'))
   })
+
+  test('Should throws if AllTasksRepository method throw', async () => {
+    const allTasksRepository = makeAllTasksRepo()
+    jest.spyOn(allTasksRepository, 'get').mockReturnValueOnce(Promise.reject(new Error()))
+    const sut = new GetAllTasks(allTasksRepository)
+    const path = resolve('src', 'db-all-tasks', 'mocks')
+    const promise = sut.get(path)
+    await expect(promise).rejects.toThrow()
+  })
 })
