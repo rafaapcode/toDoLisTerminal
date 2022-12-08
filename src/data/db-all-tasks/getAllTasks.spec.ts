@@ -47,4 +47,13 @@ describe('Add Tasks', () => {
       }
     ])
   })
+
+  test('Should calls AllTasksRepository method with correct values', async () => {
+    const allTasksRepository = makeAllTasksRepo()
+    const spyAllTasks = jest.spyOn(allTasksRepository, 'get')
+    const path = resolve('src', 'db-all-tasks', 'mocks')
+    const sut = new GetAllTasks(allTasksRepository)
+    await sut.get(path)
+    expect(spyAllTasks).toHaveBeenCalledWith(resolve('src', 'db-all-tasks', 'mocks'))
+  })
 })
