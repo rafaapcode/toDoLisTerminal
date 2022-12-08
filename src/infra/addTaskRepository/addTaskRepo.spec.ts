@@ -11,7 +11,7 @@ describe('Add Task Repository', () => {
   test('Should return a message if success', async () => {
     const sut = new AddTaskRepo()
     const task = { id: 1, body: 'Estudar Clean Architecture' }
-    const result = await sut.add(task)
+    const result = await sut.add(task, resolve('src', 'database', 'dbTest.json'))
     expect(result).toBe('ok')
   })
 
@@ -20,7 +20,7 @@ describe('Add Task Repository', () => {
     const addRepoSpy = jest.spyOn(sut, 'add') as unknown as jest.Mock<ReturnType<(key: Error) => Promise<Error>>, Parameters<(key: Error) => Promise<Error>>>
     addRepoSpy.mockReturnValueOnce(Promise.reject(new Error()))
     const task = { id: 1, body: 'Estudar Clean Architecture' }
-    const promise = sut.add(task)
+    const promise = sut.add(task, resolve('src', 'database', 'dbTest.json'))
     await expect(promise).rejects.toThrow()
   })
 })
