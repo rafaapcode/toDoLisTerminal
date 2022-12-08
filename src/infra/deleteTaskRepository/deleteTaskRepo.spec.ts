@@ -31,4 +31,12 @@ describe('Delete task', () => {
     const tasksWithoutAtask = JSON.parse(await readFile(path, 'utf8'))
     expect(tasksWithoutAtask).toEqual(expectedWithout)
   })
+
+  test('Should calls method with correct values', async () => {
+    const sut = new DeleteTaskRepository()
+    const spyDelete = jest.spyOn(sut, 'delete')
+    const path = resolve('src', 'infra', 'deleteTaskRepository', 'mocks', 'valid-tasks.json')
+    await sut.delete(path, 2)
+    expect(spyDelete).toHaveBeenCalledWith(path, 2)
+  })
 })
