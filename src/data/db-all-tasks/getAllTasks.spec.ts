@@ -41,10 +41,11 @@ const makeSut = (): SutTypes => {
   }
 }
 
+const path = resolve('src', 'db-all-tasks', 'mocks')
+
 describe('Add Tasks', () => {
   test('Should return all tasks in the JSON DB', async () => {
     const { sut } = makeSut()
-    const path = resolve('src', 'db-all-tasks', 'mocks')
     const tasks = await sut.get(path)
     expect(tasks).toEqual([
       {
@@ -65,7 +66,6 @@ describe('Add Tasks', () => {
   test('Should calls AllTasksRepository method with correct values', async () => {
     const { allTasksRepository, sut } = makeSut()
     const spyAllTasks = jest.spyOn(allTasksRepository, 'get')
-    const path = resolve('src', 'db-all-tasks', 'mocks')
     await sut.get(path)
     expect(spyAllTasks).toHaveBeenCalledWith(resolve('src', 'db-all-tasks', 'mocks'))
   })
@@ -73,7 +73,6 @@ describe('Add Tasks', () => {
   test('Should throws if AllTasksRepository method throw', async () => {
     const { allTasksRepository, sut } = makeSut()
     jest.spyOn(allTasksRepository, 'get').mockReturnValueOnce(Promise.reject(new Error()))
-    const path = resolve('src', 'db-all-tasks', 'mocks')
     const promise = sut.get(path)
     await expect(promise).rejects.toThrow()
   })

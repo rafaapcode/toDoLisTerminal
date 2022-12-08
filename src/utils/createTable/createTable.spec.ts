@@ -17,7 +17,7 @@ describe('Create Table', () => {
   test('Should return correct quantity of tasks', () => {
     const sut = makeSut()
     const result = sut.create(makeFakeTask())
-    expect(result).toBe(3)
+    expect(result.tasksQuantities).toBe(3)
   })
 
   test('Should create method calls correct values', () => {
