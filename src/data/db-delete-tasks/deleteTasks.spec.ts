@@ -17,7 +17,7 @@ describe('Delete Tasks', () => {
     const deleteRepo = makeDeleteRepository()
     const sut = new DeleteTask(deleteRepo)
     const path = resolve('src', 'database')
-    const msg = await sut.delete(path)
+    const msg = await sut.delete(path, 0)
     expect(msg).toBe('Deleted with success')
   })
 
@@ -26,8 +26,8 @@ describe('Delete Tasks', () => {
     const sut = new DeleteTask(deleteRepo)
     const spyDeleteRepo = jest.spyOn(deleteRepo, 'delete')
     const path = resolve('src', 'database')
-    await sut.delete(path)
-    expect(spyDeleteRepo).toHaveBeenCalledWith(path)
+    await sut.delete(path, 0)
+    expect(spyDeleteRepo).toHaveBeenCalledWith(path, 0)
   })
 
   test('Should throws if DeleteTaskRepository method throws', async () => {
@@ -35,7 +35,7 @@ describe('Delete Tasks', () => {
     const sut = new DeleteTask(deleteRepo)
     jest.spyOn(deleteRepo, 'delete').mockReturnValueOnce(Promise.reject(new Error()))
     const path = resolve('src', 'database')
-    const promise = sut.delete(path)
+    const promise = sut.delete(path, 0)
     await expect(promise).rejects.toThrow()
   })
 })
