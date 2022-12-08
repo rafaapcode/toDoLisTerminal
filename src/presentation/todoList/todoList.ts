@@ -1,4 +1,6 @@
+import { CreateTable } from './../protocols/createTable'
 import Options from '../protocols/options'
+import { AddTask, DeleteTasks, GetTasks } from '../../domain'
 
 export default class ToDoList {
   private readonly options: Options
@@ -7,7 +9,7 @@ export default class ToDoList {
   private readonly getAllTaks: any
   private readonly deleteTask: any
 
-  constructor (op: Options, createTable: any, addtask: any, getalltaks: any, deletetask: any) {
+  constructor (op: Options, createTable: CreateTable, addtask: AddTask, getalltaks: GetTasks, deletetask: DeleteTasks) {
     this.createTable = createTable
     this.options = op
     this.addTask = addtask

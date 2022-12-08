@@ -1,8 +1,9 @@
 import { TaskModel } from '../../domain/usecases/addtask/addtask'
+import { CreateTable, Table } from '../../presentation/protocols/createTable'
 
-export default class Table {
-  create (tasks: TaskModel[]): number {
+export default class TableCreate implements CreateTable {
+  create (tasks: TaskModel[]): Table {
     console.table(tasks)
-    return tasks.length
+    return { tasksQuantities: tasks.length }
   }
 }
