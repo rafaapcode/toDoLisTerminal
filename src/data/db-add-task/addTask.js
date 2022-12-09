@@ -37,25 +37,35 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var taskError_1 = require("../errors/taskError");
+var getAllTasks_1 = require("../db-all-tasks/getAllTasks");
+var GetAllTasksRepo_1 = require("../../infra/getAllTasks/GetAllTasksRepo");
+var node_path_1 = require("node:path");
 var AddTasks = /** @class */ (function () {
     function AddTasks(addTaskRepo) {
-        this.id = 1;
         this.repositoryTask = addTaskRepo;
     }
     AddTasks.prototype.addTask = function (task, path) {
+        var _a;
         return __awaiter(this, void 0, void 0, function () {
-            var id, taskToAdd;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var tasksAll, all, id, lastTask, taskToAdd;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
                         if (!task) {
                             return [2 /*return*/, { id: 0, body: new taskError_1["default"]('Tasks is invalid') }];
                         }
-                        id = this.id++;
-                        taskToAdd = { id: id, body: task };
-                        return [4 /*yield*/, this.repositoryTask.add(taskToAdd, path)];
+                        tasksAll = new GetAllTasksRepo_1["default"]();
+                        all = new getAllTasks_1["default"](tasksAll);
+                        return [4 /*yield*/, all.get((0, node_path_1.resolve)('src', 'database', 'database.json'))];
                     case 1:
-                        _a.sent();
+                        id = _b.sent();
+                        lastTask = (_a = id.at(-1)) === null || _a === void 0 ? void 0 : _a.id;
+                        if (!lastTask)
+                            lastTask = 0;
+                        taskToAdd = { id: lastTask + 1, body: task };
+                        return [4 /*yield*/, this.repositoryTask.add(taskToAdd, path)];
+                    case 2:
+                        _b.sent();
                         return [2 /*return*/, taskToAdd];
                 }
             });
