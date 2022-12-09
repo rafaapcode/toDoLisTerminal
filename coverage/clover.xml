@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1670533666235" clover="3.2.0">
-  <project timestamp="1670533666235" name="All files">
+<coverage generated="1670596161236" clover="3.2.0">
+  <project timestamp="1670596161236" name="All files">
     <metrics statements="40" coveredstatements="40" conditionals="1" coveredconditionals="1" methods="12" coveredmethods="12" elements="53" coveredelements="53" complexity="0" loc="40" ncloc="40" packages="8" files="8" classes="8"/>
     <package name="data.db-add-task">
       <metrics statements="10" coveredstatements="10" conditionals="1" coveredconditionals="1" methods="2" coveredmethods="2"/>
@@ -77,8 +77,8 @@
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="3" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
       </file>
     </package>
     <package name="utils.createTable">
