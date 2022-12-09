@@ -1,3 +1,5 @@
-// import ToDoList from '../presentation/todoList/todoList'
+import makeTodoList from './helper/makeTodo'
 
-// cosnt toDoList = new ToDoList()
+const todolist = makeTodoList()
+
+await todolist.execute()

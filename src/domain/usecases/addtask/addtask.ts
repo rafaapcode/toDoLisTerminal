@@ -4,5 +4,5 @@ export interface TaskModel {
 }
 
 export interface AddTask {
-  addTask: (task: string, path: string) => Promise<TaskModel>
+  addTask: (task: any, path: string) => Promise<TaskModel>
 }

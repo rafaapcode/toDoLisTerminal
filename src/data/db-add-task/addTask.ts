@@ -10,7 +10,7 @@ export default class AddTasks implements AddTask {
     this.repositoryTask = addTaskRepo
   }
 
-  async addTask (task: string, path: string): Promise<TaskModel> {
+  async addTask (task: any, path: string): Promise<TaskModel> {
     if (!task) {
       return { id: 0, body: new TaskError('Tasks is invalid') }
     }
