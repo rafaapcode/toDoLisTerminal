@@ -7,5 +7,5 @@ export interface Option {
 }
 
 export default interface Options {
-  op: () => Option
+  op: () => Promise<Option>
 }

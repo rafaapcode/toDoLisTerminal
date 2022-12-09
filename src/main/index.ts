@@ -2,4 +2,7 @@ import makeTodoList from './helper/makeTodo'
 
 const todolist = makeTodoList()
 
-await todolist.execute()
+todolist.execute()
+  .then(r => {
+    console.log(r)
+  }).catch(err => console.error(err))

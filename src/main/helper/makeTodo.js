@@ -1,0 +1,23 @@
+"use strict";
+exports.__esModule = true;
+var todoList_1 = require("../../presentation/todoList/todoList");
+var options_1 = require("../../utils/option/options");
+var createTable_1 = require("../../utils/createTable/createTable");
+var addTask_1 = require("../../data/db-add-task/addTask");
+var addTaskRepo_1 = require("../../infra/addTaskRepository/addTaskRepo");
+var getAllTasks_1 = require("../../data/db-all-tasks/getAllTasks");
+var GetAllTasksRepo_1 = require("../../infra/getAllTasks/GetAllTasksRepo");
+var deleteTasks_1 = require("../../data/db-delete-tasks/deleteTasks");
+var DeleteTaskRepo_1 = require("../../infra/deleteTaskRepository/DeleteTaskRepo");
+var makeTodoList = function () {
+    var options = new options_1["default"]();
+    var createTable = new createTable_1["default"]();
+    var addTaskRepository = new addTaskRepo_1["default"]();
+    var addTask = new addTask_1["default"](addTaskRepository);
+    var getAllTaskRepo = new GetAllTasksRepo_1["default"]();
+    var getAllTasks = new getAllTasks_1["default"](getAllTaskRepo);
+    var deleteTaskRepo = new DeleteTaskRepo_1["default"]();
+    var deleteTask = new deleteTasks_1["default"](deleteTaskRepo);
+    return new todoList_1["default"](options, createTable, addTask, getAllTasks, deleteTask);
+};
+exports["default"] = makeTodoList;
