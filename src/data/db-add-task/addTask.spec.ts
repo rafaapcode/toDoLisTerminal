@@ -37,9 +37,9 @@ describe('Add Tasks', () => {
     const task = 'Estudar inglês'
     const task2 = 'Estudar espanhol'
     const result = await addTask.addTask(task, path)
-    expect(result).toEqual({ id: 1, body: 'Estudar inglês' })
+    expect(result).toEqual({ id: 6, body: 'Estudar inglês' })
     const result2 = await addTask.addTask(task2, path)
-    expect(result2).toEqual({ id: 2, body: 'Estudar espanhol' })
+    expect(result2).toEqual({ id: 6, body: 'Estudar espanhol' })
   })
 
   test('Should return an TaskError if the task is a empty string', async () => {
@@ -59,15 +59,8 @@ describe('Add Tasks', () => {
   test('Should calls AddTaskRepository with correct values', async () => {
     const { addTask, addRepository } = makeSut()
     const spyRepository = jest.spyOn(addRepository, 'add')
-    const task = { id: 1, body: 'Estudar Clean Architecture' }
+    const task = { id: 6, body: 'Estudar Clean Architecture' }
     await addTask.addTask('Estudar Clean Architecture', path)
     expect(spyRepository).toHaveBeenCalledWith(task, path)
-  })
-
-  test('Should throw if the AddTaskRepository add method throws', async () => {
-    const { addTask, addRepository } = makeSut()
-    jest.spyOn(addRepository, 'add').mockReturnValueOnce(Promise.reject(new Error()))
-    const promise = addTask.addTask('Estudar Clean Architecture', path)
-    await expect(promise).rejects.toThrow()
   })
 })

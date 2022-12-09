@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/10</span>
+                <span class='fraction'>0/17</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/10</span>
+                <span class='fraction'>0/16</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -85,48 +85,63 @@
 <a name='L20'></a><a href='#L20'>20</a>
 <a name='L21'></a><a href='#L21'>21</a>
 <a name='L22'></a><a href='#L22'>22</a>
-<a name='L23'></a><a href='#L23'>23</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { AddTask, TaskModel } from '../../domain/usecases/addtask/addtask'
-import TaskError from '../errors/taskError'
+<span class="cstat-no" title="statement not covered" >import TaskError from '../errors/taskError'</span>
 import AddTaskRepository from '../protocols/addTaskRepository'
+<span class="cstat-no" title="statement not covered" >import GetAllTasks from '../db-all-tasks/getAllTasks'</span>
+<span class="cstat-no" title="statement not covered" >import GetAllTasksRepo from '../../infra/getAllTasks/GetAllTasksRepo'</span>
+<span class="cstat-no" title="statement not covered" >import { resolve } from 'node:path'</span>
 &nbsp;
-export default class AddTasks implements AddTask {
-  private id: number
+<span class="cstat-no" title="statement not covered" >export default class A</span>ddTasks implements AddTask {
   private readonly repositoryTask: AddTaskRepository
-  constructor (addTaskRepo: AddTaskRepository) {
-    this.id = 1
-    this.repositoryTask = addTaskRepo
+<span class="fstat-no" title="function not covered" >  constructor (a</span>ddTaskRepo: AddTaskRepository) {
+<span class="cstat-no" title="statement not covered" >    this.repositoryTask = addTaskRepo</span>
   }
 &nbsp;
-  async addTask (task: any, path: string): Promise&lt;TaskModel&gt; {
-    if (!task) {
-      return { id: 0, body: new TaskError('Tasks is invalid') }
+<span class="fstat-no" title="function not covered" >  async </span>addTask (task: any, path: string): Promise&lt;TaskModel&gt; {
+<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (!task) {</span>
+<span class="cstat-no" title="statement not covered" >      return { id: 0, body: new TaskError('Tasks is invalid') }</span>
     }
-    const id = this.id++
-    const taskToAdd = { id, body: task }
-    await this.repositoryTask.add(taskToAdd, path)
-    return taskToAdd
+    const tasksAll = <span class="cstat-no" title="statement not covered" >new GetAllTasksRepo()</span>
+    const all = <span class="cstat-no" title="statement not covered" >new GetAllTasks(tasksAll)</span>
+    const id = <span class="cstat-no" title="statement not covered" >await all.get(resolve('src', 'database', 'database.json'))</span>
+    let lastTask = <span class="cstat-no" title="statement not covered" >id.at(-1)?.id</span>
+<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (!lastTask) <span class="cstat-no" title="statement not covered" >lastTask = 0</span></span>
+    const taskToAdd = <span class="cstat-no" title="statement not covered" >{ id: lastTask + 1, body: task }</span>
+<span class="cstat-no" title="statement not covered" >    await this.repositoryTask.add(taskToAdd, path)</span>
+<span class="cstat-no" title="statement not covered" >    return taskToAdd</span>
   }
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -136,7 +151,7 @@ export default class AddTasks implements AddTask {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-12-09T14:29:21.168Z
+                at 2022-12-09T20:57:36.472Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
