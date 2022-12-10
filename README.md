@@ -18,3 +18,7 @@
 - Nesse projeto aprendi um pouco de como se criar uma aplicação totalmente desacoplada de bibliotecas externas, nessa aplicação não usei muito bibliotecas externas, pois a criei para entender na prática como funciona a CLEAN ARCHITECTURE
 - Usando o clean architecture nossa aplicação fica desacoplada de qualquer biblioteca externa,  podemos mudar o Banco de Dados, ORM, Bibliotecas de Validação e várias outras, modificando somente uma parte da nossa aplicação ( ADAPTERS ).
 - Também aprendi a testar minha aplicação, usando a metodologia TDD.
+
+
+https://user-images.githubusercontent.com/83471941/206814293-c8372be4-399d-4692-bc32-15acd06de9c6.mp4
+
